@@ -2,6 +2,7 @@ package com.techelevator.ui;
 
 import com.techelevator.models.Item;
 
+import java.io.FileWriter;
 import java.math.BigDecimal;
 import java.util.InputMismatchException;
 import java.util.Map;
@@ -14,6 +15,7 @@ import java.util.Scanner;
  */
 public class UserInput
 {
+    public static int counter = 0;
     private static Scanner scanner = new Scanner(System.in);
     public static double money = 0;
     public static String getHomeScreenOption()
@@ -59,6 +61,7 @@ public class UserInput
         System.out.println("Current Money Provided: $"+ new BigDecimal(""+money));
 
         System.out.print("Please select an option: ");
+        System.out.println();
         String selectedOption = scanner.nextLine();
         String option = selectedOption.trim().toUpperCase();
         if (option.equals("M"))
@@ -85,19 +88,17 @@ public class UserInput
         try {
             int input = scanner.nextInt();
             System.out.println(input);
-            while ((double) (input) == 1.0 || (double) (input) == 5.0
-                    || (double) (input) == 10 || (double) (input) == 20
-                    || (double) (input) == 50 || (double) (input) == 100) {
-                money += (input);
+            if ( (input) == 1.0 ||  (input) == 5.0
+                    ||  (input) == 10 ||  (input) == 20
+                    ||  (input) == 50 ||  (input) == 100) {
+                // Audit add previous moeny and new money (money +" "+money+input)
+                money += input;
                 System.out.println("updated money: $" + new BigDecimal(""+money));
-
                 addMoney();
-                scanner.nextInt();
             }
-
-            getPurchaseScreen();
         } catch (NumberFormatException | InputMismatchException e){
-            getPurchaseScreen();
+            System.out.println("Wrong input returning to purchase menu!");
+            scanner.nextLine();
         }
     }
 
@@ -105,48 +106,43 @@ public class UserInput
         System.out.println("Select item");
         String userInput = scanner.nextLine();
 
-
         for(Map.Entry<Item, Integer> map : inputMap.entrySet()){
-            int counter = 0;
-            if(userInput.equals(map.getKey().getSlot())){
-                    counter++;
-                    if(counter%2 == 0) {
+            try {
+                if (userInput.equals(map.getKey().getSlot())) {
+                    counter += 1;
+                    System.out.println("Counter " + counter);
+                    if (counter % 2 == 0) {
                         money++;
                     }
                     System.out.println("Item: " + map.getKey().getName());
                     System.out.println("Cost: " + map.getKey().getPrice());
-                    System.out.println("Money Remaining: " + (money - map.getKey().getPrice()));
+                    System.out.println("Money Remaining: " + new BigDecimal("" + (money - map.getKey().getPrice())));
+                    //Audit the slot Current money and previous money
                     money -= map.getKey().getPrice();
-
-                    if(map.getKey().getType() == "Munchy") {
-                    System.out.println("Munchy, Munchy, so Good!");
-                     }
-                    if(map.getKey().getType() == "Candy") {
-                    System.out.println("Sugar, Sugar, so Sweet!");
+                    if (map.getKey().getType().equals("Munchy")) {
+                        System.out.println("Munchy, Munchy, so Good!");
                     }
-                    if(map.getKey().getType() == "Drink") {
-                    System.out.println("Drinky, Drinky, Slurp Slurp!");
+                    if (map.getKey().getType().equals("Candy")) {
+                        System.out.println("Sugar, Sugar, so Sweet!");
                     }
-                    if(map.getKey().getType() == "Drink") {
-                    System.out.println("Chewy, Chewy, Lots O Bubbles!");
+                    if (map.getKey().getType().equals("Drink")) {
+                        System.out.println("Drinky, Drinky, Slurp Slurp!");
                     }
-
-                    scanner.nextLine();
+                    if (map.getKey().getType().equals("Drink")) {
+                        System.out.println("Chewy, Chewy, Lots O Bubbles!");
+                    }
+                } else if (map.getValue() == 0) {
+                    System.out.println("NO LONGER AVAILABLE");
                     getPurchaseScreen();
                 }
-
-             else if(map.getValue() == 0){
-                    System.out.println("NO LONGER AVAILABLE");
-                    scanner.nextLine();
-                    getPurchaseScreen();
-
+            }catch (Exception e){
+                scanner.nextLine();
             }
         }
-                System.out.println("This item doesn't exist");
-                scanner.nextLine();
-                getPurchaseScreen();
+            System.out.println("This item doesn't exist");
+            getPurchaseScreen();
+            scanner.nextLine();
         }
-
     }
 
 

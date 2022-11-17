@@ -3,6 +3,7 @@ package com.techelevator.application;
 import com.techelevator.ui.UserInput;
 import com.techelevator.ui.UserOutput;
 import com.techelevator.models.Item;
+import static com.techelevator.ui.UserInput.counter;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,14 +15,17 @@ import java.util.Scanner;
 import static com.techelevator.ui.UserInput.itemAvailable;
 import static com.techelevator.ui.UserInput.money;
 import static com.techelevator.ui.UserOutput.displayItem;
+import static com.techelevator.ui.UserOutput.moneyReturn;
 
 public class VendingMachine 
 {
+    private int level = 1;
+
     private Map<Item,Integer> productMap = new HashMap<>();
     public void run()
     {
         generateMap();
-        while(true)
+        while(level==1)
         {
             UserOutput.displayHomeScreen();
             String choice = UserInput.getHomeScreenOption();
@@ -32,24 +36,21 @@ public class VendingMachine
             }
             else if(choice.equals("purchase"))
             {
-                String choice2 = UserInput.getPurchaseScreen();
-                Scanner scan = new Scanner(System.in);
-                if(choice2.equals("addMoney")){
-                    UserInput.addMoney();
-                } if(choice2.equals("select")){
-                    displayItem(productMap);
-                    itemAvailable(productMap);
-                    //if slot non exist reutnr to purchase
-                    // if slot is empty return to purchase
-                    // if slot is not empty and money requirement is met dispense and return message+ increment purchased items by 1
-                    // subtract money + Perform BOGODF - buy one get second item one dollar off math
-                    // add log to audit slot location and price change
-                } else if (choice2.equals("returnMain")){
-                    // return user money and update current money in machine to 0
-                    // return to main menu
-                    // reset price discount to 0
-                    UserOutput.displayHomeScreen();
-                    UserInput.getHomeScreenOption();
+                level=2;
+                while(level==2){
+                    String choice2 = UserInput.getPurchaseScreen();
+                    Scanner scan = new Scanner(System.in);
+                    if(choice2.equals("addMoney")){
+                        UserInput.addMoney();
+                    } if(choice2.equals("select")){
+                        displayItem(productMap);
+                        itemAvailable(productMap);
+
+                    } else if (choice2.equals("returnMain")){
+                        moneyReturn();
+                        counter = 0;
+                        level=1;
+                    }
                 }
             }
             else if(choice.equals("exit"))
