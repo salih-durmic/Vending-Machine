@@ -105,141 +105,48 @@ public class UserInput
         System.out.println("Select item");
         String userInput = scanner.nextLine();
 
+
         for(Map.Entry<Item, Integer> map : inputMap.entrySet()){
-            if(map.getKey().getSlot().equals("A1")&&userInput.equals("A1")){
-                if(map.getValue()==0){
-                    System.out.println("No Longer Available");
+            int counter = 0;
+            if(userInput.equals(map.getKey().getSlot())){
+                    counter++;
+                    if(counter%2 == 0) {
+                        money++;
+                    }
+                    System.out.println("Item: " + map.getKey().getName());
+                    System.out.println("Cost: " + map.getKey().getPrice());
+                    System.out.println("Money Remaining: " + (money - map.getKey().getPrice()));
+                    money -= map.getKey().getPrice();
+
+                    if(map.getKey().getType() == "Munchy") {
+                    System.out.println("Munchy, Munchy, so Good!");
+                     }
+                    if(map.getKey().getType() == "Candy") {
+                    System.out.println("Sugar, Sugar, so Sweet!");
+                    }
+                    if(map.getKey().getType() == "Drink") {
+                    System.out.println("Drinky, Drinky, Slurp Slurp!");
+                    }
+                    if(map.getKey().getType() == "Drink") {
+                    System.out.println("Chewy, Chewy, Lots O Bubbles!");
+                    }
+
                     scanner.nextLine();
                     getPurchaseScreen();
                 }
-                inputMap.put(map.getKey(),map.getValue()-1);
-            } else if(map.getKey().getSlot().equals("A2")&&userInput.equals("A2")){
-                if(map.getValue()==0){
-                    System.out.println("No Longer Available");
+
+             else if(map.getValue() == 0){
+                    System.out.println("NO LONGER AVAILABLE");
                     scanner.nextLine();
                     getPurchaseScreen();
-                }
-                inputMap.put(map.getKey(),map.getValue()-1);
-            } else if(map.getKey().getSlot().equals("A3")){
-                if(map.getValue()==0){
-                    System.out.println("No Longer Available");
-                    scanner.nextLine();
-                    getPurchaseScreen();
-                }
-                inputMap.put(map.getKey(),map.getValue()-1);
-            } else if(map.getKey().getSlot().equals("A4")){
-                if(map.getValue()==0){
-                    System.out.println("No Longer Available");
-                    scanner.nextLine();
-                    getPurchaseScreen();
-                }
-                inputMap.put(map.getKey(),map.getValue()-1);
-            } else if(map.getKey().getSlot().equals("B1")){
-                if(map.getValue()==0){
-                    System.out.println("No Longer Available");
-                    scanner.nextLine();
-                    getPurchaseScreen();
-                }
-                inputMap.put(map.getKey(),map.getValue()-1);
-            } else if(map.getKey().getSlot().equals("B2")){
-                if(map.getValue()==0){
-                    System.out.println("No Longer Available");
-                    scanner.nextLine();
-                    getPurchaseScreen();
-                }
-                inputMap.put(map.getKey(),map.getValue()-1);
-            } else if(map.getKey().getSlot().equals("B3")){
-                if(map.getValue()==0){
-                    System.out.println("No Longer Available");
-                    scanner.nextLine();
-                    getPurchaseScreen();
-                }
-                inputMap.put(map.getKey(),map.getValue()-1);
-            } else if(map.getKey().getSlot().equals("B4")){
-                if(map.getValue()==0){
-                    System.out.println("No Longer Available");
-                    scanner.nextLine();
-                    getPurchaseScreen();
-                }
-                inputMap.put(map.getKey(),map.getValue()-1);
-            } else if(map.getKey().getSlot().equals("C1")){
-                if(map.getValue()==0){
-                    System.out.println("No Longer Available");
-                    scanner.nextLine();
-                    getPurchaseScreen();
-                }
-                inputMap.put(map.getKey(),map.getValue()-1);
-            } else if(map.getKey().getSlot().equals("C2")){
-                if(map.getValue()==0){
-                    System.out.println("No Longer Available");
-                    scanner.nextLine();
-                    getPurchaseScreen();
-                }
-                inputMap.put(map.getKey(),map.getValue()-1);
-            } else if(map.getKey().getSlot().equals("C3")){
-                if(map.getValue()==0){
-                    System.out.println("No Longer Available");
-                    scanner.nextLine();
-                    getPurchaseScreen();
-                }
-                inputMap.put(map.getKey(),map.getValue()-1);
-            } else if(map.getKey().getSlot().equals("C4")){
-                if(map.getValue()==0){
-                    System.out.println("No Longer Available");
-                    scanner.nextLine();
-                    getPurchaseScreen();
-                }
-                inputMap.put(map.getKey(),map.getValue()-1);
-            } else if(map.getKey().getSlot().equals("D1")){
-                if(map.getValue()==0){
-                    System.out.println("No Longer Available");
-                    scanner.nextLine();
-                    getPurchaseScreen();
-                }
-                inputMap.put(map.getKey(),map.getValue()-1);
-            } else if(map.getKey().getSlot().equals("D2")){
-                if(map.getValue()==0){
-                    System.out.println("No Longer Available");
-                    scanner.nextLine();
-                    getPurchaseScreen();
-                }
-                inputMap.put(map.getKey(),map.getValue()-1);
-            } else if(map.getKey().getSlot().equals("D3")){
-                if(map.getValue()==0){
-                    System.out.println("No Longer Available");
-                    scanner.nextLine();
-                    getPurchaseScreen();
-                }
-                inputMap.put(map.getKey(),map.getValue()-1);
-            } else if(map.getKey().getSlot().equals("D4")){
-                if(map.getValue()==0){
-                    System.out.println("No Longer Available");
-                    scanner.nextLine();
-                    getPurchaseScreen();
-                }
-                inputMap.put(map.getKey(),map.getValue()-1);
-            } else{
+
+            }
+        }
                 System.out.println("This item doesn't exist");
                 scanner.nextLine();
                 getPurchaseScreen();
-            }
         }
-            //subtract inventroy from A1
 
     }
-}
-/*case "A2":
-            case "A3":
-            case "A4":
-            case "B1":
-            case "B2":
-            case "B3":
-            case "B4":
-            case "C1":
-            case "C2":
-            case "C3":
-            case "C4":
-            case "D1":
-            case "D2":
-            case "D3":
-            case "D4":*/
+
+
