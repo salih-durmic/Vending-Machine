@@ -1,5 +1,7 @@
 package com.techelevator.ui;
 
+import com.techelevator.models.Item;
+
 import java.math.BigDecimal;
 import java.util.Map;
 
@@ -29,4 +31,12 @@ public class UserOutput
         System.out.println();
     }
 
+    public static void displayItem(Map<Item,Integer> inputMap){
+        {
+            for(Map.Entry<Item, Integer> map : inputMap.entrySet()){
+                System.out.println("Slot: "+map.getKey().getSlot()+" Name: "+map.getKey().getName()+" Price: $"+map.getKey().getPrice()
+                        +" Quantity: "+map.getValue());
+            }
+        }
+    }
 }
