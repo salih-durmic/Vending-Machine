@@ -92,8 +92,8 @@ public class UserOutput
             money%=.05;
         }
         money =0;
-        System.out.println("Your change is "+hundred+" hundred bills,"+fifty+ " fifty bills,"+twenty+" twenty bills,"+ten+" ten bills"+five+" five bills"
-        +one+" one dollar bill"+ quarter+" quarters"+dime+" dimes"+ nickel+" nickels");
+        System.out.println("Your change is "+hundred+" hundred dollar bills, "+fifty+ " fifty dollar bills, "+twenty+" twenty dollar bills, "+ten+" ten dollar bills, "+five+" five dollar bills, "
+        +one+" one dollar bills, "+ quarter+" quarters, "+dime+" dimes, and "+ nickel+" nickels.");
 
     }
 }
