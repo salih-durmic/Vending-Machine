@@ -65,6 +65,7 @@ public class VendingMachine<formatDateTime> {
     public void generateMap(){
         File inventory = new File("catering.csv");
 
+        int maxInventory = 6;
         if(inventory.exists()==false){
             System.out.println("Not a File!");
         }
@@ -73,7 +74,7 @@ public class VendingMachine<formatDateTime> {
             while(scanFile.hasNextLine()){
                 String itemlist []= scanFile.nextLine().split(",");
                 Item products = new Item(itemlist[0],itemlist[1],Double.parseDouble(itemlist[2]),itemlist[3]);
-                productMap.put(products,6);
+                productMap.put(products,maxInventory);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
