@@ -82,7 +82,12 @@ public class UserInput
         }
     }
 
+    public static boolean moneyUsed = false;
+
+    public static double tempMoney = 0;
+
     public static void addMoney(){
+        tempMoney = money;
         System.out.println("Please add bills(1,5,10,20,50,100)");
         System.out.println("Type any characters to Exit");
         try {
@@ -93,6 +98,7 @@ public class UserInput
                     ||  (input) == 50 ||  (input) == 100) {
                 // Audit add previous moeny and new money (money +" "+money+input)
                 money += input;
+                moneyUsed = true;
                 System.out.println("updated money: $" + new BigDecimal(""+money));
                 addMoney();
             }
@@ -101,6 +107,8 @@ public class UserInput
             scanner.nextLine();
         }
     }
+
+
 
     public static void itemAvailable(Map<Item,Integer> inputMap){
         System.out.println("Select item");

@@ -3,22 +3,24 @@ package com.techelevator.application;
 import com.techelevator.ui.UserInput;
 import com.techelevator.ui.UserOutput;
 import com.techelevator.models.Item;
-import static com.techelevator.ui.UserInput.counter;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
 import java.sql.SQLOutput;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-import static com.techelevator.ui.UserInput.itemAvailable;
-import static com.techelevator.ui.UserInput.money;
+import static com.techelevator.ui.UserInput.*;
 import static com.techelevator.ui.UserOutput.displayItem;
 import static com.techelevator.ui.UserOutput.moneyReturn;
 
-public class VendingMachine 
-{
+public class VendingMachine<formatDateTime> {
+
     private int level = 1;
 
     private Map<Item,Integer> productMap = new HashMap<>();
